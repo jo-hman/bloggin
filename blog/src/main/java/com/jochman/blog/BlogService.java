@@ -12,6 +12,7 @@ public class BlogService {
                 .blogName(blogCreationRequest.blogName())
                 .blogDescription(blogCreationRequest.blogDescription())
                 .build();
+        //todo: check if blogName isn't taken
         blogRepository.save(blog);
     }
 }
