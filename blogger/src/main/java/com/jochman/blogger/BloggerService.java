@@ -1,11 +1,15 @@
 package com.jochman.blogger;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@AllArgsConstructor
 public class BloggerService {
 
-    BloggerRepository bloggerRepository;
+    private final BloggerRepository bloggerRepository;
 
     public void registerBlogger(BloggerRegistrationRequest bloggerRegistrationRequest){
         Blogger blogger = Blogger.builder()
@@ -15,5 +19,9 @@ public class BloggerService {
         //todo: check if nickname isn't taken
         //todo: check if email is valid
         bloggerRepository.save(blogger);
+    }
+
+    public Optional<Blogger> getBlogger(Long bloggerId) {
+        return bloggerRepository.findById(bloggerId);
     }
 }

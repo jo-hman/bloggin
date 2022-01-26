@@ -1,15 +1,13 @@
 package com.jochman.blog;
 
+import com.jochman.blogger.Blogger;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 
 @Data
@@ -29,6 +27,10 @@ public class Blog {
             generator = "blog_id_sequence"
     )
     private Long id;
+
+    @JsonIgnore
+    @ManyToOne
+    private Blogger blogger;
     private String blogName;
     private String blogDescription;
 
