@@ -2,12 +2,14 @@ package com.jochman.blogger;
 
 import com.jochman.clients.blogger.Blogger;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@ComponentScan("com.jochman.clients.blogger")
 public class BloggerService {
 
     private final BloggerRepository bloggerRepository;

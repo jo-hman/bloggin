@@ -29,12 +29,12 @@ public class Blogger {
     private Long bloggerId;
 
     //todo: create a Feign Client for both blog and blogger
-//    @OneToMany(
-//            targetEntity = Blog.class,
-//            cascade = CascadeType.ALL
-//    )
-//    @JoinColumn(name = "blog_fk", referencedColumnName = "bloggerId")
-//    private Set<Blog> blogList;
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "blog_fk")
+    private Set<Blog> blogList;
+
     private String nickName;
     private String email;
 }

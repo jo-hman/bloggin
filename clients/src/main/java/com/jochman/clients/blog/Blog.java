@@ -27,12 +27,11 @@ public class Blog {
     )
     private Long blogId;
 
-//    @ManyToOne(
-//            targetEntity = Blogger.class,
-//            fetch = FetchType.LAZY
-//            )
-//    @JoinColumn(name = "bloggerId")
-//    private Blogger blogger;
+    @ManyToOne(
+            fetch = FetchType.LAZY
+            )
+    @JoinColumn(name = "blogger_fk")
+    private Blogger blogger;
     private String blogName;
     private String blogDescription;
 

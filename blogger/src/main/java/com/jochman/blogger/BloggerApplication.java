@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan("com.jochman.clients.blogger")
+@EntityScan("com.jochman.clients")
 public class BloggerApplication {
     public static void main(String[] args) {
         SpringApplication.run(BloggerApplication.class, args);
