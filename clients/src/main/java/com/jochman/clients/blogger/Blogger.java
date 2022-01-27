@@ -1,14 +1,14 @@
-package com.jochman.blogger;
+package com.jochman.clients.blogger;
 
+import com.jochman.clients.blog.Blog;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.jochman.blog.Blog;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -26,13 +26,15 @@ public class Blogger {
             strategy = GenerationType.SEQUENCE,
             generator = "customer_id_sequence"
     )
-    private Long id;
+    private Long bloggerId;
 
     //todo: create a Feign Client for both blog and blogger
-    @OneToMany(mappedBy = "blogger")
-    private HashSet<Blog> blogsSet;
-
+//    @OneToMany(
+//            targetEntity = Blog.class,
+//            cascade = CascadeType.ALL
+//    )
+//    @JoinColumn(name = "blog_fk", referencedColumnName = "bloggerId")
+//    private Set<Blog> blogList;
     private String nickName;
     private String email;
-    //todo: create relation between user and blog(user is supposed to have his own blogs)
 }

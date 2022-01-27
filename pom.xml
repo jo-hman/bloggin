@@ -13,6 +13,7 @@
     <module>blogger</module>
     <module>blog</module>
       <module>post</module>
+      <module>clients</module>
   </modules>
 
   <name>bloggin</name>

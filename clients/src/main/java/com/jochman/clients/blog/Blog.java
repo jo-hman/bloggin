@@ -1,11 +1,10 @@
-package com.jochman.blog;
+package com.jochman.clients.blog;
 
-import com.jochman.blogger.Blogger;
+import com.jochman.clients.blogger.Blogger;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -26,11 +25,14 @@ public class Blog {
             strategy = GenerationType.SEQUENCE,
             generator = "blog_id_sequence"
     )
-    private Long id;
+    private Long blogId;
 
-    @JsonIgnore
-    @ManyToOne
-    private Blogger blogger;
+//    @ManyToOne(
+//            targetEntity = Blogger.class,
+//            fetch = FetchType.LAZY
+//            )
+//    @JoinColumn(name = "bloggerId")
+//    private Blogger blogger;
     private String blogName;
     private String blogDescription;
 

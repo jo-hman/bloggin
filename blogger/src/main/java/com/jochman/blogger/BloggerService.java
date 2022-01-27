@@ -1,5 +1,6 @@
 package com.jochman.blogger;
 
+import com.jochman.clients.blogger.Blogger;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

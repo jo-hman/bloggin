@@ -1,5 +1,6 @@
 package com.jochman.blog;
 
+import com.jochman.clients.blog.Blog;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class BlogController {
     private final BlogService blogService;
 
     @PostMapping
-    public void createBlog(BlogCreationRequest blogCreationRequest){
+    public void createBlog(@RequestBody BlogCreationRequest blogCreationRequest){
         log.info("new blog created {}", blogCreationRequest);
         blogService.createBlog(blogCreationRequest);
     }
