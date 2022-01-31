@@ -1,15 +1,12 @@
-package com.jochman.post;
+package com.jochman.clients.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 
 @Data
@@ -27,7 +24,13 @@ public class Post {
             strategy = GenerationType.SEQUENCE,
             generator = "post_id_sequence"
     )
-    private Long id;
+    private Long postId;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "blog_fk", referencedColumnName = "blogId")
+    private Blog blog;
+
     private String postTitle;
     private String postContent;
     //todo: consider how post content should be stored and how to add any media like images, videos, etc.

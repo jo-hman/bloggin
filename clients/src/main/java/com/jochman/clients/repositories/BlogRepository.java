@@ -1,6 +1,6 @@
-package com.jochman.blog;
+package com.jochman.clients.repositories;
 
-import com.jochman.clients.blog.Blog;
+import com.jochman.clients.entities.Blog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,12 +1,14 @@
-package com.jochman.clients.blog;
+package com.jochman.clients.entities;
 
-import com.jochman.clients.blogger.Blogger;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Data
@@ -27,13 +29,19 @@ public class Blog {
     )
     private Long blogId;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-            )
-    @JoinColumn(name = "blogger_fk")
+//    @JsonBackReference
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "blogger_fk", referencedColumnName = "bloggerId")
     private Blogger blogger;
+
+    @JsonBackReference
+    @OneToMany(
+            mappedBy = "blog",
+            cascade = CascadeType.ALL
+    )
+    private Set<Post> postSet;
+
     private String blogName;
     private String blogDescription;
-
-    //todo: Blog has posts (make a relation)
 }

@@ -1,15 +1,18 @@
 package com.jochman.post;
 
+import com.jochman.clients.entities.Post;
+import com.jochman.clients.repositories.BlogRepository;
+import com.jochman.clients.repositories.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
+
+    private final BlogRepository blogRepository;
 
     public void createPost(PostCreationRequest postCreationRequest){
         Post post = Post.builder()
@@ -20,7 +23,16 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public Optional<Post> getPost(Long postId) {
-        return postRepository.findById(postId);
+    public void addPostToBlog(PostCreationRequest postCreationRequest, Long blogId){
+        Post blog = Post.builder()
+                .blog(blogRepository.findById(blogId).get())
+                .postTitle(postCreationRequest.postTitle())
+                .postContent(postCreationRequest.postContent())
+                .build();
+        postRepository.save(blog);
+    }
+
+    public Post getPost(Long postId) {
+        return postRepository.findById(postId).get();
     }
 }

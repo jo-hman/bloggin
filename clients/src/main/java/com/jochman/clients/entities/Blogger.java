@@ -1,10 +1,12 @@
-package com.jochman.clients.blogger;
+package com.jochman.clients.entities;
 
-import com.jochman.clients.blog.Blog;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 
 import javax.persistence.*;
@@ -28,12 +30,14 @@ public class Blogger {
     )
     private Long bloggerId;
 
-    //todo: create a Feign Client for both blog and blogger
+//    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(
+            mappedBy = "blogger",
             cascade = CascadeType.ALL
     )
-    @JoinColumn(name = "blog_fk")
-    private Set<Blog> blogList;
+//    @JoinColumn(name = "blog_fk")
+    private Set<Blog> blogSet;
 
     private String nickName;
     private String email;

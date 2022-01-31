@@ -1,6 +1,6 @@
 package com.jochman.blogger;
 
-import com.jochman.clients.blogger.Blogger;
+import com.jochman.clients.entities.Blogger;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

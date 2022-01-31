@@ -1,6 +1,7 @@
 package com.jochman.blogger;
 
-import com.jochman.clients.blogger.Blogger;
+import com.jochman.clients.entities.Blogger;
+import com.jochman.clients.repositories.BloggerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
