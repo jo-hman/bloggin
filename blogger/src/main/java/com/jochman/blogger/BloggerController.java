@@ -1,11 +1,14 @@
 package com.jochman.blogger;
 
+import com.jochman.clients.entities.Blog;
 import com.jochman.clients.entities.Blogger;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @AllArgsConstructor
 @Slf4j
@@ -22,8 +25,14 @@ public class BloggerController {
     }
 
     @GetMapping(path = "{bloggerId}")
-    public Optional<Blogger> getBlogger(@PathVariable("bloggerId") Long bloggerId){
+    public Blogger getBlogger(@PathVariable("bloggerId") Long bloggerId){
         log.info("blogger get request for blogger {}", bloggerId);
         return bloggerService.getBlogger(bloggerId);
+    }
+
+    @GetMapping(path = "{bloggerId}/blogs")
+    public Set<Blog> getBlogs(@PathVariable("bloggerId") Long bloggerId){
+        log.info("blogger {} get request for blogs", bloggerId);
+        return bloggerService.getBlogs(bloggerId);
     }
 }

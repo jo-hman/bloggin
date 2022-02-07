@@ -2,16 +2,14 @@ package com.jochman.clients.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +30,7 @@ public class Blog {
 //    @JsonBackReference
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name = "blogger_fk", referencedColumnName = "bloggerId")
+    @JoinColumn(name = "blogger_fk")
     private Blogger blogger;
 
     @JsonBackReference

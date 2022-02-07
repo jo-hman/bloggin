@@ -1,18 +1,14 @@
 package com.jochman.clients.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
+import lombok.*;
 
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,9 +32,15 @@ public class Blogger {
             mappedBy = "blogger",
             cascade = CascadeType.ALL
     )
+//    @JoinColumn(name = "blog_fk", referencedColumnName = "blogId")
+
 //    @JoinColumn(name = "blog_fk")
     private Set<Blog> blogSet;
 
     private String nickName;
     private String email;
+
+    public void addBlog(Blog blog){
+        blogSet.add(blog);
+    }
 }

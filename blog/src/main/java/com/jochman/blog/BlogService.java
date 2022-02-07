@@ -1,6 +1,7 @@
 package com.jochman.blog;
 
 import com.jochman.clients.entities.Blog;
+import com.jochman.clients.entities.Blogger;
 import com.jochman.clients.repositories.BlogRepository;
 import com.jochman.clients.repositories.BloggerRepository;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,12 @@ public class BlogService {
                 .blogDescription(blogCreationRequest.blogDescription())
                 .build();
         blogRepository.save(blog);
+
+
+        Blogger blogger = bloggerRepository.findById(bloggerId).get();
+        blogger.addBlog(blog);
+
+        bloggerRepository.save(blogger);
     }
 
     public Blog getBlog(Long blogId) {
