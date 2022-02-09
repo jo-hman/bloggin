@@ -1,14 +1,14 @@
 package com.jochman.blog;
 
 import com.jochman.clients.entities.Blog;
-import com.jochman.clients.entities.Blogger;
+import com.jochman.clients.entities.Post;
 import com.jochman.clients.repositories.BlogRepository;
 import com.jochman.clients.repositories.BloggerRepository;
+import com.jochman.clients.requestBodies.BlogCreationRequest;
+import com.jochman.clients.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -26,19 +26,18 @@ public class BlogService {
         blogRepository.save(blog);
     }
 
-    public void addBloggerToBlog(BlogCreationRequest blogCreationRequest, Long bloggerId){
-        Blog blog = Blog.builder()
-                .blogger(bloggerRepository.findById(bloggerId).get())
-                .blogName(blogCreationRequest.blogName())
-                .blogDescription(blogCreationRequest.blogDescription())
+    public void addPost(PostCreationRequest postCreationRequest, Long blogId){
+        Blog blog = blogRepository.findById(blogId).get();
+
+        Post post = Post.builder()
+                .blog(blog)
+                .postTitle(postCreationRequest.postTitle())
+                .postContent(postCreationRequest.postContent())
                 .build();
+
+        //todo:check if post's title isn't taken
+        blog.addPost(post);
         blogRepository.save(blog);
-
-
-        Blogger blogger = bloggerRepository.findById(bloggerId).get();
-        blogger.addBlog(blog);
-
-        bloggerRepository.save(blogger);
     }
 
     public Blog getBlog(Long blogId) {

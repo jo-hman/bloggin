@@ -1,4 +1,4 @@
-package com.jochman.post;
+package com.jochman.clients.requestBodies;
 
 public record PostCreationRequest(
         String postTitle,

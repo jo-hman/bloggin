@@ -1,4 +1,4 @@
-package com.jochman.blog;
+package com.jochman.clients.requestBodies;
 
 public record BlogCreationRequest (
         String blogName,

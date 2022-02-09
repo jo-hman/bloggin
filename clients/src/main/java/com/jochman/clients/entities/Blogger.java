@@ -26,15 +26,12 @@ public class Blogger {
     )
     private Long bloggerId;
 
-//    @JsonManagedReference
     @JsonBackReference
     @OneToMany(
             mappedBy = "blogger",
             cascade = CascadeType.ALL
     )
-//    @JoinColumn(name = "blog_fk", referencedColumnName = "blogId")
 
-//    @JoinColumn(name = "blog_fk")
     private Set<Blog> blogSet;
 
     private String nickName;

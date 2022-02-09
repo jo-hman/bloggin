@@ -27,7 +27,6 @@ public class Blog {
     )
     private Long blogId;
 
-//    @JsonBackReference
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "blogger_fk")
@@ -42,4 +41,8 @@ public class Blog {
 
     private String blogName;
     private String blogDescription;
+
+    public void addPost(Post post) {
+        postSet.add(post);
+    }
 }

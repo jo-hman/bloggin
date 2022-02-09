@@ -1,13 +1,12 @@
 package com.jochman.blogger;
 
+import com.jochman.clients.requestBodies.BlogCreationRequest;
 import com.jochman.clients.entities.Blog;
 import com.jochman.clients.entities.Blogger;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -18,10 +17,18 @@ public class BloggerController {
 
     private final BloggerService bloggerService;
 
+    //todo: create endpoint to retrieve all bloggers from db
+
     @PostMapping
     public void registerBlogger(@RequestBody BloggerRegistrationRequest bloggerRegistrationRequest){
         log.info("new blogger registered {}", bloggerRegistrationRequest);
         bloggerService.registerBlogger(bloggerRegistrationRequest);
+    }
+
+    @PutMapping("/{bloggerId}/blog/add")
+    public void addBloggerToBlog(@RequestBody BlogCreationRequest blogCreationRequest, @PathVariable Long bloggerId){
+        log.info("new blog created {} for blogger {}", blogCreationRequest, bloggerId);
+        bloggerService.addBlog(blogCreationRequest, bloggerId);
     }
 
     @GetMapping(path = "{bloggerId}")

@@ -26,7 +26,7 @@ public class Post {
 
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name = "blog_fk", referencedColumnName = "blogId")
+    @JoinColumn(name = "blog_fk")
     private Blog blog;
 
     private String postTitle;
