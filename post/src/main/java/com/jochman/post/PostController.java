@@ -1,20 +1,25 @@
 package com.jochman.post;
 
-import com.jochman.clients.entities.Post;
-import com.jochman.clients.requestBodies.PostCreationRequest;
+import com.jochman.components.entities.Post;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/post")
+@RequestMapping("api/v1/posts")
 public class PostController {
 
     private final PostService postService;
 
-    //todo: create endpoint to retrieve all posts from db
+    @GetMapping
+    public List<Post> getAllBloggers(){
+        log.info("get request for all bloggers");
+        return postService.getAllPosts();
+    }
 
     @GetMapping(path = "{postId}")
     public Post getPost(@PathVariable Long postId){

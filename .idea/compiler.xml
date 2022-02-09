@@ -8,7 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="blogger" />
-        <module name="clients" />
+        <module name="feed" />
+        <module name="components" />
         <module name="blog" />
         <module name="post" />
       </profile>

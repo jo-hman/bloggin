@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan("com.jochman.clients.entities")
-@EnableJpaRepositories("com.jochman.clients.repositories")
+@EntityScan("com.jochman.components.entities")
+@EnableJpaRepositories("com.jochman.components.repositories")
 public class BlogApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class, args);

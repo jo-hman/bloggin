@@ -12,8 +12,9 @@
   <modules>
     <module>blogger</module>
     <module>blog</module>
-      <module>post</module>
-      <module>clients</module>
+    <module>post</module>
+    <module>components</module>
+    <module>feed</module>
   </modules>
 
   <name>bloggin</name>
@@ -36,6 +37,11 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>2020.0.4</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -49,6 +55,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <version>2.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+      <version>3.1.0</version>
     </dependency>
   </dependencies>
 

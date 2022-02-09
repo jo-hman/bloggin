@@ -1,21 +1,30 @@
 package com.jochman.blog;
 
-import com.jochman.clients.entities.Blog;
-import com.jochman.clients.requestBodies.BlogCreationRequest;
-import com.jochman.clients.requestBodies.PostCreationRequest;
+import com.jochman.components.entities.Blog;
+import com.jochman.components.entities.Blogger;
+import com.jochman.components.requestBodies.BlogCreationRequest;
+import com.jochman.components.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/blog")
+@RequestMapping("api/v1/blogs")
 public class BlogController {
 
     private final BlogService blogService;
 
     //todo: create endpoint to retrieve all blogs from db
+
+    @GetMapping
+    public List<Blog> getAllBlogs(){
+        log.info("get request for all blogs");
+        return blogService.getAllBlog();
+    }
 
     @PostMapping
     public void createBlog(@RequestBody BlogCreationRequest blogCreationRequest){

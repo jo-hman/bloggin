@@ -1,18 +1,18 @@
 package com.jochman.blogger;
 
-import com.jochman.clients.requestBodies.BlogCreationRequest;
-import com.jochman.clients.entities.Blog;
-import com.jochman.clients.entities.Blogger;
-import com.jochman.clients.repositories.BloggerRepository;
+import com.jochman.components.requestBodies.BlogCreationRequest;
+import com.jochman.components.entities.Blog;
+import com.jochman.components.entities.Blogger;
+import com.jochman.components.repositories.BloggerRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
 @AllArgsConstructor
-@ComponentScan("com.jochman.clients.blogger")
+//@ComponentScan("com.jochman.clients.blogger")
 public class BloggerService {
 
     private final BloggerRepository bloggerRepository;
@@ -45,5 +45,9 @@ public class BloggerService {
     public Set<Blog> getBlogs(Long bloggerId) {
         Blogger blogger = bloggerRepository.findById(bloggerId).get();
         return blogger.getBlogSet();
+    }
+
+    public List<Blogger> getAllBloggers() {
+        return bloggerRepository.findAll();
     }
 }

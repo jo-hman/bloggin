@@ -1,12 +1,13 @@
 package com.jochman.post;
 
-import com.jochman.clients.entities.Blog;
-import com.jochman.clients.entities.Post;
-import com.jochman.clients.repositories.BlogRepository;
-import com.jochman.clients.repositories.PostRepository;
-import com.jochman.clients.requestBodies.PostCreationRequest;
+import com.jochman.components.entities.Blogger;
+import com.jochman.components.entities.Post;
+import com.jochman.components.repositories.BlogRepository;
+import com.jochman.components.repositories.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -18,5 +19,9 @@ public class PostService {
 
     public Post getPost(Long postId) {
         return postRepository.findById(postId).get();
+    }
+
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
     }
 }
