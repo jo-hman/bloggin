@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @FeignClient(
-        name = "post",
-        url = "localhost:8082/api/v1/posts"
+        name = "post"
+//        url = "/api/v1/posts"
 )
 public interface PostClient {
-    @GetMapping
+    @GetMapping("/api/v1/posts")
     List<Post> getAllPosts();
 }

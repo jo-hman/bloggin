@@ -16,6 +16,7 @@
     <module>components</module>
     <module>feed</module>
     <module>notification</module>
+    <module>eureka-server</module>
   </modules>
 
   <name>bloggin</name>
@@ -27,6 +28,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <spring.boot.maven.plugin.version>2.6.2</spring.boot.maven.plugin.version>
     <spring.boot.dependencies.version>2.6.2</spring.boot.dependencies.version>
+    <spring.cloud.dependencies.version>2020.0.4</spring.cloud.dependencies.version>
   </properties>
 
   <dependencyManagement>
@@ -41,7 +43,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>2020.0.4</version>
+        <version>${spring.cloud.dependencies.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -55,7 +57,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>2.6.2</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>

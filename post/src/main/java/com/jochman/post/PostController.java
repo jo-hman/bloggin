@@ -16,7 +16,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public List<Post> getAllBloggers(){
+    public List<Post> getAllPosts(){
         log.info("get request for all bloggers");
         return postService.getAllPosts();
     }
