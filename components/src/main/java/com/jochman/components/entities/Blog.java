@@ -16,6 +16,8 @@ import java.util.Set;
 @Entity
 public class Blog {
 
+    //todo:add tags for making recomendations
+
     @Id
     @SequenceGenerator(
             name = "blog_id_sequence",

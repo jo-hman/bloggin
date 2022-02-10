@@ -15,6 +15,7 @@
     <module>post</module>
     <module>components</module>
     <module>feed</module>
+    <module>notification</module>
   </modules>
 
   <name>bloggin</name>

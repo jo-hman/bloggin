@@ -1,7 +1,6 @@
 package com.jochman.blog;
 
 import com.jochman.components.entities.Blog;
-import com.jochman.components.entities.Blogger;
 import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
@@ -17,8 +16,6 @@ import java.util.List;
 public class BlogController {
 
     private final BlogService blogService;
-
-    //todo: create endpoint to retrieve all blogs from db
 
     @GetMapping
     public List<Blog> getAllBlogs(){

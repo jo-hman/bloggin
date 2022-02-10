@@ -2,7 +2,6 @@ package com.jochman.feed;
 
 import com.jochman.components.entities.Post;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;

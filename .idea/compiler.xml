@@ -7,12 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="blogger" />
         <module name="feed" />
+        <module name="notification" />
         <module name="components" />
-        <module name="blog" />
         <module name="post" />
+        <module name="blogger" />
+        <module name="blog" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="client" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

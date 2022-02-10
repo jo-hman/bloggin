@@ -18,8 +18,6 @@ public class BloggerController {
 
     private final BloggerService bloggerService;
 
-    //todo:create feed module to handle recomending blogs and posts(add tags field in blog and post)
-    //todo: create endpoint to retrieve all bloggers from db
 
     @GetMapping
     public List<Blogger> getAllBloggers(){

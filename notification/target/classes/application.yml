@@ -1,11 +1,11 @@
 server:
-  port: 8083
+  port: 8084
 spring:
   application:
-    name: feed
+    name: notification
   datasource:
     password: password
-    url: jdbc:postgresql://localhost:5432/feed
+    url: jdbc:postgresql://localhost:5432/notification
     username: jochman
   jpa:
     hibernate:
@@ -15,4 +15,3 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-#    todo:make it serverless
