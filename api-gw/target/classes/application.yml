@@ -1,0 +1,28 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: apigw
+  zipkin:
+    base-url: http://localhost:9411
+  cloud:
+    gateway:
+      routes:
+        - id: blog
+          uri: lb://BLOG
+          predicates: Path=/api/v1/blogs/**
+        - id: bloggers
+          uri: lb://BLOGGERS
+          predicates: Path=/api/v1/bloggers/**
+        - id: post
+          uri: lb://POST
+          predicates: Path=/api/v1/posts/**
+        - id: feed
+          uri: lb://FEED
+          predicates: Path=/api/v1/feed/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

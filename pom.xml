@@ -17,6 +17,7 @@
     <module>feed</module>
     <module>notification</module>
     <module>eureka-server</module>
+      <module>api-gw</module>
   </modules>
 
   <name>bloggin</name>

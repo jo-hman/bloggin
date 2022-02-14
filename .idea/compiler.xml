@@ -10,6 +10,7 @@
         <module name="feed" />
         <module name="notification" />
         <module name="components" />
+        <module name="api-gw" />
         <module name="post" />
         <module name="blogger" />
         <module name="blog" />
