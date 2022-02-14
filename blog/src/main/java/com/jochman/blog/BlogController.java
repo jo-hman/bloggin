@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//todo: add distributed tracing
+//todo: add message queue on communication with notification service
+
 @Slf4j
 @AllArgsConstructor
 @RestController
