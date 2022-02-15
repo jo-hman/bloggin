@@ -12,6 +12,7 @@
         <module name="components" />
         <module name="api-gw" />
         <module name="post" />
+        <module name="amqp" />
         <module name="blogger" />
         <module name="blog" />
         <module name="eureka-server" />

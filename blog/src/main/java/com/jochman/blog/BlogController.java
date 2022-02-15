@@ -11,6 +11,7 @@ import java.util.List;
 
 //todo: add distributed tracing
 //todo: add message queue on communication with notification service
+//todo: security staff
 
 @Slf4j
 @AllArgsConstructor

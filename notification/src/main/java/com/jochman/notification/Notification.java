@@ -1,16 +1,12 @@
 package com.jochman.notification;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,9 +14,17 @@ public class Notification {
 
     @Id
     @SequenceGenerator(
-            sequenceName = "notification_sequence",
-            name = "notification_sequence"
+            name = "notification_id_sequence",
+            sequenceName = "notification_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "notification_id_sequence"
     )
     private Long notificationId;
+
+    private Long bloggerId;
+
+    private String notificationMessage;
 
 }
