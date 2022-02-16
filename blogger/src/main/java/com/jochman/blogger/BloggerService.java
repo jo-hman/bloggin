@@ -1,9 +1,11 @@
 package com.jochman.blogger;
 
+import com.jochman.amqp.RabbitMQMessageProducer;
 import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.entities.Blog;
 import com.jochman.components.entities.Blogger;
 import com.jochman.components.repositories.BloggerRepository;
+import com.jochman.components.requestBodies.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.Set;
 public class BloggerService {
 
     private final BloggerRepository bloggerRepository;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerBlogger(BloggerRegistrationRequest bloggerRegistrationRequest){
         Blogger blogger = Blogger.builder()
@@ -25,6 +28,18 @@ public class BloggerService {
         //todo: check if nickname isn't taken
         //todo: check if email is valid
         bloggerRepository.save(blogger);
+
+        NotificationRequest notificationRequest = new NotificationRequest(
+//                NotificationRequest.EntityType.BLOGGER,
+                blogger.getBloggerId(),
+                String.format("Welcome %s to our blogging website!", blogger.getNickName())
+        );
+
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
     }
 
     public void addBlog(BlogCreationRequest blogCreationRequest, Long bloggerId){

@@ -1,9 +1,9 @@
-package com.jochman.notification;
+package com.jochman.notification.notificationTypes;
 
 import com.jochman.notification.notificationTypes.BloggerNotification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification, Long> {
+public interface BloggerNotificationRepository extends JpaRepository<BloggerNotification, Long> {
 }
