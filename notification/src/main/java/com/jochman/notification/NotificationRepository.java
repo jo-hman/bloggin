@@ -1,6 +1,5 @@
 package com.jochman.notification;
 
-import com.jochman.notification.notificationTypes.BloggerNotification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
