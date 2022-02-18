@@ -1,4 +1,4 @@
-package com.jochman.notification;
+package com.jochman.notification.types;
 
 import lombok.*;
 
@@ -10,20 +10,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Notification {
+public class PostNotification {
 
     @Id
     @SequenceGenerator(
-            name = "notification_id_sequence",
-            sequenceName = "notification_id_sequence"
+            name = "post_notification_id_sequence",
+            sequenceName = "post_notification_id_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "notification_id_sequence"
+            generator = "post_notification_id_sequence"
     )
     private Long notificationId;
 
-    private Long bloggerId;
+    private Long postId;
 
     private String notificationMessage;
 

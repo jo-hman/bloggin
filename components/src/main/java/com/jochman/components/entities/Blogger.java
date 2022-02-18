@@ -19,12 +19,12 @@ public class Blogger {
 
     @Id
     @SequenceGenerator(
-            name = "customer_id_sequence",
-            sequenceName = "customer_id_sequence"
+            name = "blogger_id_sequence",
+            sequenceName = "blogger_id_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_id_sequence"
+            generator = "blogger_id_sequence"
     )
     private Long bloggerId;
 

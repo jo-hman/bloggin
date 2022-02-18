@@ -1,6 +1,7 @@
 package com.jochman.blogger;
 
 import com.jochman.amqp.RabbitMQMessageProducer;
+import com.jochman.components.repositories.BlogRepository;
 import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.entities.Blog;
 import com.jochman.components.entities.Blogger;
@@ -14,10 +15,10 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
-//@ComponentScan("com.jochman.clients.blogger")
 public class BloggerService {
 
     private final BloggerRepository bloggerRepository;
+    private final BlogRepository blogRepository;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerBlogger(BloggerRegistrationRequest bloggerRegistrationRequest){
@@ -30,7 +31,7 @@ public class BloggerService {
         bloggerRepository.save(blogger);
 
         NotificationRequest notificationRequest = new NotificationRequest(
-//                NotificationRequest.EntityType.BLOGGER,
+                NotificationRequest.EntityType.BLOGGER,
                 blogger.getBloggerId(),
                 String.format("Welcome %s to our blogging website!", blogger.getNickName())
         );
@@ -44,13 +45,26 @@ public class BloggerService {
 
     public void addBlog(BlogCreationRequest blogCreationRequest, Long bloggerId){
         Blogger blogger = bloggerRepository.findById(bloggerId).get();
+        //todo:make this method talk to Blog service to receive a blog
         Blog blog = Blog.builder()
                 .blogger(blogger)
                 .blogName(blogCreationRequest.blogName())
                 .blogDescription(blogCreationRequest.blogDescription())
                 .build();
         blogger.addBlog(blog);
-        bloggerRepository.save(blogger);
+        blogRepository.saveAndFlush(blog);
+
+        NotificationRequest notificationRequest = new NotificationRequest(
+                NotificationRequest.EntityType.BLOG,
+                blog.getBlogId(),
+                String.format("Your %s blog has been created!", blog.getBlogName())
+        );
+
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
     }
 
     public Blogger getBlogger(Long bloggerId) {

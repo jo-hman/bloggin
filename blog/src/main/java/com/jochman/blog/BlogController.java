@@ -26,11 +26,11 @@ public class BlogController {
         return blogService.getAllBlog();
     }
 
-    @PostMapping
-    public void createBlog(@RequestBody BlogCreationRequest blogCreationRequest){
-        log.info("new blog created {}", blogCreationRequest);
-        blogService.createBlog(blogCreationRequest);
-    }
+//    @PostMapping
+//    public void createBlog(@RequestBody BlogCreationRequest blogCreationRequest){
+//        log.info("new blog created {}", blogCreationRequest);
+//        blogService.createBlog(blogCreationRequest);
+//    }
 
     @PutMapping("/{blogId}/post/add")
     public void addPostToBlog(@RequestBody PostCreationRequest postCreationRequest, @PathVariable Long blogId){
