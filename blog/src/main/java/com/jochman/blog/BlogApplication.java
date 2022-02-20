@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(
         scanBasePackages = {
                 "com.jochman.blog",
-                "com.jochman.amqp"
+                "com.jochman.amqp",
+                "com.jochman.exception"
         }
 )
 @EnableEurekaClient

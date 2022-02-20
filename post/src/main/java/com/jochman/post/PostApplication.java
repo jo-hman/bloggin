@@ -6,7 +6,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(
+        scanBasePackages = {
+                "com.jochman.post",
+                "com.jochman.amqp",
+                "com.jochman.components.exception"
+        }
+)
 @EnableEurekaClient
 @EntityScan("com.jochman.components.entities")
 @EnableJpaRepositories("com.jochman.components.repositories")

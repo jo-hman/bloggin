@@ -9,7 +9,6 @@ import java.util.List;
 
 @FeignClient(
         name = "post"
-//        url = "/api/v1/posts"
 )
 public interface PostClient {
     @GetMapping("/api/v1/posts")

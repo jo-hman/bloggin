@@ -4,7 +4,9 @@ import com.jochman.amqp.RabbitMQMessageProducer;
 import com.jochman.components.entities.Blog;
 import com.jochman.components.entities.Post;
 import com.jochman.components.repositories.BlogRepository;
+import com.jochman.components.repositories.BloggerRepository;
 import com.jochman.components.repositories.PostRepository;
+import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.requestBodies.NotificationRequest;
 import com.jochman.components.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
@@ -19,17 +21,18 @@ public class BlogService {
 
     private final BlogRepository blogRepository;
     private final PostRepository postRepository;
-//    private final BloggerRepository bloggerRepository;
+    private final BloggerRepository bloggerRepository;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
-//    public void createBlog(BlogCreationRequest blogCreationRequest){
-//        Blog blog = Blog.builder()
-//                .blogName(blogCreationRequest.blogName())
-//                .blogDescription(blogCreationRequest.blogDescription())
-//                .build();
-//        //todo: check if blogName isn't taken
-//        blogRepository.save(blog);
-//
+    public void createBlog(BlogCreationRequest blogCreationRequest, Long bloggerId){
+        Blog blog = Blog.builder()
+                .blogger(bloggerRepository.findById(bloggerId).get())
+                .blogName(blogCreationRequest.blogName())
+                .blogDescription(blogCreationRequest.blogDescription())
+                .build();
+        //todo: check if blogName isn't taken
+        blogRepository.save(blog);
+
 //        NotificationRequest notificationRequest = new NotificationRequest(
 //                NotificationRequest.EntityType.BLOG,
 //                blog.getBlogId(),
@@ -41,7 +44,7 @@ public class BlogService {
 //                "internal.exchange",
 //                "internal.notification.routing-key"
 //        );
-//    }
+    }
 
     public void addPost(PostCreationRequest postCreationRequest, Long blogId){
         Blog blog = blogRepository.findById(blogId).get();

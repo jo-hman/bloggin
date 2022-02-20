@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FeedService {
 
-    private PostClient postClient;
+    private final PostClient postClient;
 
 
     public Feed getFeed() {
