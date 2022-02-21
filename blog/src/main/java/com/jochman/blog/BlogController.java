@@ -13,7 +13,7 @@ import java.util.List;
 
 //todo: security staff
 //todo: testing
-//todo: how not to expose endpoints publicly
+//todo: create verification service
 
 @Slf4j
 @AllArgsConstructor
@@ -29,18 +29,19 @@ public class BlogController {
         return new ResponseEntity<>(blogService.getAllBlog(), HttpStatus.OK);
     }
 
-    @PostMapping("/{bloggerId}")
-    void createBlog(@RequestBody BlogCreationRequest blogCreationRequest,@PathVariable("bloggerId") Long bloggerId){
+    @PostMapping("/create/{bloggerId}")
+    public ResponseEntity createBlog(@RequestBody BlogCreationRequest blogCreationRequest,@PathVariable("bloggerId") Long bloggerId){
         log.info("new blog created {}", blogCreationRequest);
         blogService.createBlog(blogCreationRequest, bloggerId);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{blogId}/post/add")
-    public ResponseEntity addPostToBlog(@RequestBody PostCreationRequest postCreationRequest, @PathVariable Long blogId){
-        log.info("new post created {} for blogger {}", postCreationRequest, blogId);
-        blogService.addPost(postCreationRequest, blogId);
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
+//    @PutMapping("/{blogId}/post/add")
+//    public ResponseEntity addPostToBlog(@RequestBody PostCreationRequest postCreationRequest, @PathVariable Long blogId){
+//        log.info("new post created {} for blogger {}", postCreationRequest, blogId);
+//        blogService.addPost(postCreationRequest, blogId);
+//        return new ResponseEntity(HttpStatus.CREATED);
+//    }
 
     @GetMapping(path = "{blogId}")
     public ResponseEntity<Blog> getBlog(@PathVariable Long blogId){

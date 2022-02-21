@@ -33,36 +33,10 @@ public class BlogService {
         //todo: check if blogName isn't taken
         blogRepository.save(blog);
 
-//        NotificationRequest notificationRequest = new NotificationRequest(
-//                NotificationRequest.EntityType.BLOG,
-//                blog.getBlogId(),
-//                String.format("Your %s blog has been created!", blog.getBlogName())
-//        );
-//
-//        rabbitMQMessageProducer.publish(
-//                notificationRequest,
-//                "internal.exchange",
-//                "internal.notification.routing-key"
-//        );
-    }
-
-    public void addPost(PostCreationRequest postCreationRequest, Long blogId){
-        Blog blog = blogRepository.findById(blogId).get();
-        //todo:make this method talk to Post service to receive a post
-        Post post = Post.builder()
-                .blog(blog)
-                .postTitle(postCreationRequest.postTitle())
-                .postContent(postCreationRequest.postContent())
-                .build();
-
-        //todo:check if post's title isn't taken
-        blog.addPost(post);
-        postRepository.saveAndFlush(post);
-
         NotificationRequest notificationRequest = new NotificationRequest(
-                NotificationRequest.EntityType.POST,
-                post.getPostId(),
-                String.format("Your %s post has been created!", post.getPostTitle())
+                NotificationRequest.EntityType.BLOG,
+                blog.getBlogId(),
+                String.format("Your %s blog has been created!", blog.getBlogName())
         );
 
         rabbitMQMessageProducer.publish(
@@ -71,6 +45,32 @@ public class BlogService {
                 "internal.notification.routing-key"
         );
     }
+
+//    public void addPost(PostCreationRequest postCreationRequest, Long blogId){
+//        Blog blog = blogRepository.findById(blogId).get();
+//        //todo:make this method talk to Post service to receive a post
+//        Post post = Post.builder()
+//                .blog(blog)
+//                .postTitle(postCreationRequest.postTitle())
+//                .postContent(postCreationRequest.postContent())
+//                .build();
+//
+//        //todo:check if post's title isn't taken
+//        blog.addPost(post);
+//        postRepository.saveAndFlush(post);
+//
+//        NotificationRequest notificationRequest = new NotificationRequest(
+//                NotificationRequest.EntityType.POST,
+//                post.getPostId(),
+//                String.format("Your %s post has been created!", post.getPostTitle())
+//        );
+//
+//        rabbitMQMessageProducer.publish(
+//                notificationRequest,
+//                "internal.exchange",
+//                "internal.notification.routing-key"
+//        );
+//    }
 
     public Blog getBlog(Long blogId) {
         return blogRepository.findById(blogId).get();

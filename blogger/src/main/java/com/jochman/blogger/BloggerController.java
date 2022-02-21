@@ -3,6 +3,7 @@ package com.jochman.blogger;
 import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.entities.Blog;
 import com.jochman.components.entities.Blogger;
+import com.jochman.components.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,6 @@ public class BloggerController {
 
     private final BloggerService bloggerService;
 
-
     @GetMapping
     public ResponseEntity<List<Blogger>> getAllBloggers(){
         log.info("get request for all bloggers");
@@ -33,7 +33,6 @@ public class BloggerController {
     public ResponseEntity<Blogger> getBlogger(@PathVariable("bloggerId") Long bloggerId){
         log.info("blogger get request for blogger {}", bloggerId);
         return new ResponseEntity<>(bloggerService.getBlogger(bloggerId), HttpStatus.OK);
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Blogger" + bloggerId + "not found");
     }
 
     @GetMapping("{bloggerId}/blogs")
@@ -50,10 +49,17 @@ public class BloggerController {
     }
 
     @PutMapping("/{bloggerId}/blog/add")
-    public ResponseEntity addBlog(@RequestBody BlogCreationRequest blogCreationRequest, @PathVariable Long bloggerId){
-        log.info("new blog created {} for blogger {}", blogCreationRequest, bloggerId);
-        bloggerService.addBlog(blogCreationRequest, bloggerId);
-        return new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity createBlog(@RequestBody BlogCreationRequest blogCreationRequest, @PathVariable("bloggerId") Long bloggerId){
+        log.info("new blog creation request for blogger {}", bloggerId);
+        return bloggerService.addBlog(blogCreationRequest, bloggerId);
+    }
+
+    @PutMapping("/{bloggerId}/blog/{blogId}/post/add")
+    public ResponseEntity createPost(@RequestBody PostCreationRequest postCreationRequest,
+                                  @PathVariable("bloggerId") Long bloggerId,
+                                  @PathVariable("blogId") Long blogId){
+        log.info("new post creation request for blogger {} in blog {}", bloggerId, blogId);
+        return bloggerService.createPost(postCreationRequest, bloggerId, blogId);
     }
 
     @DeleteMapping("/{bloggerId}")

@@ -1,6 +1,7 @@
 package com.jochman.post;
 
 import com.jochman.components.entities.Post;
+import com.jochman.components.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,15 @@ public class PostController {
         return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "{postId}")
+    @GetMapping("{postId}")
     public ResponseEntity<Post> getPost(@PathVariable Long postId){
         log.info("post get request for post {}", postId);
         return new ResponseEntity<>(postService.getPost(postId), HttpStatus.OK);
+    }
+
+    @PostMapping("/add/{blogId}")
+    public ResponseEntity createPost(@RequestBody PostCreationRequest postCreationRequest, @PathVariable("blogId") Long blogId){
+        postService.createPost(postCreationRequest, blogId);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 }

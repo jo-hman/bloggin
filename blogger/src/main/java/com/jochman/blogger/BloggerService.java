@@ -2,17 +2,21 @@ package com.jochman.blogger;
 
 import com.jochman.amqp.RabbitMQMessageProducer;
 import com.jochman.components.clients.blog.BlogClient;
+import com.jochman.components.clients.post.PostClient;
 import com.jochman.components.repositories.BlogRepository;
 import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.entities.Blog;
 import com.jochman.components.entities.Blogger;
 import com.jochman.components.repositories.BloggerRepository;
 import com.jochman.components.requestBodies.NotificationRequest;
+import com.jochman.components.requestBodies.PostCreationRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Service
@@ -20,8 +24,9 @@ import java.util.Set;
 public class BloggerService {
 
     private final BloggerRepository bloggerRepository;
-//    private final BlogRepository blogRepository;
-    private BlogClient blogClient;
+    private final BlogRepository blogRepository;
+    private final PostClient postClient;
+    private final BlogClient blogClient;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerBlogger(BloggerRegistrationRequest bloggerRegistrationRequest){
@@ -46,9 +51,11 @@ public class BloggerService {
         );
     }
 
-    public void addBlog(BlogCreationRequest blogCreationRequest, Long bloggerId){
-        Blogger blogger = bloggerRepository.findById(bloggerId).get();
-        blogClient.createBlog(blogCreationRequest, bloggerId);
+    public ResponseEntity addBlog(BlogCreationRequest blogCreationRequest, Long bloggerId){
+        Blogger blogger = bloggerRepository.findById(bloggerId).get(); //checks if bloggerId exists
+        return blogClient.createBlog(blogCreationRequest, bloggerId);
+        //TODO blogger verification
+
 //        Blog blog = Blog.builder()
 //                .blogger(blogger)
 //                .blogName(blogCreationRequest.blogName())
@@ -85,5 +92,13 @@ public class BloggerService {
 
     public void deleteBlogger(Long bloggerId) {
         bloggerRepository.deleteById(bloggerId);
+    }
+
+    public ResponseEntity createPost(PostCreationRequest postCreationRequest, Long bloggerId, Long blogId) throws NoSuchElementException {
+        Blogger blogger = bloggerRepository.findById(bloggerId).get();
+        Blog blog = blogRepository.findById(blogId).get();
+        //TODO blogger and blog verification
+
+        return postClient.createPost(postCreationRequest, blogId);
     }
 }
