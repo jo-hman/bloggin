@@ -33,8 +33,10 @@ public class Blogger {
             mappedBy = "blogger",
             cascade = CascadeType.ALL
     )
-
     private Set<Blog> blogSet;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roleSet;
 
     private String nickName;
     private String email;
