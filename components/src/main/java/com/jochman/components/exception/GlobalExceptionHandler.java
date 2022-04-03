@@ -16,4 +16,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException exception){
         return new ResponseEntity<>("Element does not exist in the database", HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalStateException(IllegalArgumentException exception){
+        return new ResponseEntity<>("Element already exists in the database", HttpStatus.BAD_REQUEST);
+    }
 }

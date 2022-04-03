@@ -1,6 +1,7 @@
 package com.jochman.blogger;
 
 public record BloggerRegistrationRequest(
-        String nickName,
-        String email) {
+        String nickname,
+        String email,
+        String roleName) {
 }

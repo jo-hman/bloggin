@@ -1,10 +1,10 @@
 package com.jochman.components.repositories;
 
-import com.jochman.components.entities.Blogger;
+import com.jochman.components.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BloggerRepository extends JpaRepository<Blogger, Long> {
-    Blogger findByNickname(String nickName);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Role findByName(String name);
 }

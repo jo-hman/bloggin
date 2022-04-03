@@ -5,6 +5,7 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -38,7 +39,7 @@ public class Blogger {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roleSet;
 
-    private String nickName;
+    private String nickname;
     private String email;
 
     public void addBlog(Blog blog){

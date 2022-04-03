@@ -1,9 +1,12 @@
 package com.jochman.blogger;
 
+import com.jochman.components.entities.Role;
+import com.jochman.components.repositories.RoleRepository;
 import com.jochman.components.requestBodies.BlogCreationRequest;
 import com.jochman.components.entities.Blog;
 import com.jochman.components.entities.Blogger;
 import com.jochman.components.requestBodies.PostCreationRequest;
+import com.jochman.components.requestBodies.RoleRequestBody;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,7 +28,7 @@ public class BloggerController {
 
     @GetMapping
     public ResponseEntity<List<Blogger>> getAllBloggers(){
-        log.info("get request for all bloggers");
+        log.info("get request for all bloggers");//TODO getting all bloggers at the same time will kill the API
         return new ResponseEntity<>(bloggerService.getAllBloggers(), HttpStatus.OK);
     }
 
@@ -39,6 +42,20 @@ public class BloggerController {
     public ResponseEntity<Set<Blog>> getBlogs(@PathVariable("bloggerId") Long bloggerId){
         log.info("blogger {} get request for blogs", bloggerId);
         return new ResponseEntity<>(bloggerService.getBlogs(bloggerId), HttpStatus.OK);
+    }
+
+    @PostMapping("role")
+    public ResponseEntity addRole(@RequestBody RoleRequestBody roleRequestBody){
+        log.info("role post request {}", roleRequestBody);
+        bloggerService.addRole(roleRequestBody);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @PutMapping("{bloggerId}/role")
+    public ResponseEntity addRoleToBlogger(@RequestBody RoleRequestBody roleRequestBody, @PathVariable("bloggerId") Long bloggerId){
+        log.info("role put request {} for blogger {}",roleRequestBody, bloggerId);
+        bloggerService.addRoleToUser(roleRequestBody, bloggerId);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @PostMapping
